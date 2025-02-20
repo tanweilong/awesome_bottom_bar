@@ -14,7 +14,6 @@
  *  limitations under the License.
  */
 
-
 import 'package:awesome_bottom_bar/count_style.dart';
 import 'package:awesome_bottom_bar/tab_item.dart';
 import 'package:awesome_bottom_bar/widgets/build_icon.dart';
@@ -63,39 +62,41 @@ class Inspired extends StatefulWidget {
   final Duration? duration;
   final String animateStyle;
   final List<TabItem<dynamic>> items;
-  const Inspired({
-    Key? key,
-    required this.background,
-    required this.items,
-    required this.color,
-    required this.colorSelected,
-    this.fixed = false,
-    this.height = 40,
-    this.initialActive,
-    this.curve = Curves.easeInOut,
-    this.cornerRadius,
-    this.onTap,
-    this.chipStyle,
-    this.elevation,
-    this.top = -18,
-    this.curveSize,
-    this.containerSize,
-    this.itemStyle = ItemStyle.circle,
-    this.animated = true,
-    this.isAnimated = true,
-    this.shadowColor,
-    this.padTop = 12,
-    this.padbottom = 12,
-    this.pad = 4,
-    this.radius = 0,
-    this.fixedIndex = 0,
-    this.iconSize = 22,
-    this.countStyle,
-    this.titleStyle,
-    this.sizeInside = 48,
-    this.duration,
-    this.animateStyle = 'flip',
-  }) : super(key: key);
+  final bool showSelectedTitle;
+  const Inspired(
+      {Key? key,
+      required this.background,
+      required this.items,
+      required this.color,
+      required this.colorSelected,
+      this.fixed = false,
+      this.height = 40,
+      this.initialActive,
+      this.curve = Curves.easeInOut,
+      this.cornerRadius,
+      this.onTap,
+      this.chipStyle,
+      this.elevation,
+      this.top = -18,
+      this.curveSize,
+      this.containerSize,
+      this.itemStyle = ItemStyle.circle,
+      this.animated = true,
+      this.isAnimated = true,
+      this.shadowColor,
+      this.padTop = 12,
+      this.padbottom = 12,
+      this.pad = 4,
+      this.radius = 0,
+      this.fixedIndex = 0,
+      this.iconSize = 22,
+      this.countStyle,
+      this.titleStyle,
+      this.sizeInside = 48,
+      this.duration,
+      this.animateStyle = 'flip',
+      this.showSelectedTitle = true})
+      : super(key: key);
 
   @override
   _InspiredState createState() => _InspiredState();
@@ -132,8 +133,7 @@ class _InspiredState extends State<Inspired> with TickerProviderStateMixin {
     _updateAnimation(
       from: from ?? _currentIndex,
       to: index,
-      duration:
-          widget.animated == true ? const Duration(milliseconds: _transitionDuration) : const Duration(microseconds: 0),
+      duration: widget.animated == true ? const Duration(milliseconds: _transitionDuration) : const Duration(microseconds: 0),
     );
     // ignore: unawaited_futures
     _animationController?.forward();
@@ -255,12 +255,8 @@ class _InspiredState extends State<Inspired> with TickerProviderStateMixin {
               drawHexagon: drawHexagon,
               notchSmoothness: notchSmoothness,
               convexBridge: convexBridge,
-              leftCornerRadius: widget.fixed && widget.fixedIndex == 0
-                  ? 0
-                  : (widget.initialActive == 0 && !widget.fixed ? 0 : widget.radius!),
-              rightCornerRadius: widget.fixed && widget.fixedIndex == count - 1
-                  ? 0
-                  : (widget.initialActive == count - 1 && !widget.fixed ? 0 : widget.radius!),
+              leftCornerRadius: widget.fixed && widget.fixedIndex == 0 ? 0 : (widget.initialActive == 0 && !widget.fixed ? 0 : widget.radius!),
+              rightCornerRadius: widget.fixed && widget.fixedIndex == count - 1 ? 0 : (widget.initialActive == count - 1 && !widget.fixed ? 0 : widget.radius!),
             ),
           ),
         ),
@@ -292,10 +288,11 @@ class _InspiredState extends State<Inspired> with TickerProviderStateMixin {
       }
       var active = _currentIndex == i;
 
-      children.add(Expanded(
-        child: GestureDetector(
+      children.add(
+        Expanded(
+          child: GestureDetector(
             key: ValueKey(value),
-          behavior: HitTestBehavior.opaque,
+            behavior: HitTestBehavior.opaque,
             onTap: () => _onTabClick(i),
             child: buildItem(context, item: widget.items[i], index: i, active: active),
           ),
@@ -398,6 +395,14 @@ class _InspiredState extends State<Inspired> with TickerProviderStateMixin {
               countStyle: widget.countStyle,
             ),
           ),
+        if (item.title is String && item.title != '' && widget.showSelectedTitle) ...[
+          SizedBox(height: widget.pad),
+          Text(
+            item.title!,
+            style: Theme.of(context).textTheme.labelSmall?.merge(widget.titleStyle).copyWith(color: itemColor),
+            textAlign: TextAlign.center,
+          )
+        ],
       ],
     );
   }
