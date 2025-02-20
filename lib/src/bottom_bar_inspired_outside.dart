@@ -34,6 +34,7 @@ class BottomBarInspiredOutside extends StatefulWidget {
   final double? pad;
   final double? radius;
   final int? fixedIndex;
+  final bool showSelectedTitle;
   const BottomBarInspiredOutside({
     Key? key,
     required this.items,
@@ -63,6 +64,7 @@ class BottomBarInspiredOutside extends StatefulWidget {
     this.pad = 4,
     this.radius = 0,
     this.fixedIndex = 0,
+    this.showSelectedTitle = true
   }) : super(key: key);
 
   @override
@@ -101,6 +103,7 @@ class _BottomBarInspiredOutsideState extends State<BottomBarInspiredOutside> {
       duration: widget.duration,
       curve: widget.curve ?? Curves.easeInOut,
       animateStyle: 'scale',
+      showSelectedTitle: widget.showSelectedTitle
     );
   }
 }

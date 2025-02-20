@@ -29,6 +29,7 @@ class BottomBarInspiredInside extends StatefulWidget {
   final double? pad;
   final double? radius;
   final int? fixedIndex;
+  final bool showSelectedTitle;
   const BottomBarInspiredInside({
     Key? key,
     required this.items,
@@ -55,6 +56,7 @@ class BottomBarInspiredInside extends StatefulWidget {
     this.pad = 4,
     this.radius = 0,
     this.fixedIndex = 0,
+    this.showSelectedTitle = true,
   }) : super(key: key);
 
   @override
@@ -66,31 +68,31 @@ class _BottomBarInspiredInsideState extends State<BottomBarInspiredInside> {
   @override
   Widget build(BuildContext context) {
     return Inspired(
-      height: widget.height!,
-      background: widget.backgroundColor,
-      fixed: widget.fixed,
-      elevation: widget.elevation,
-      animated: widget.animated,
-      isAnimated: widget.isAnimated,
-      pad: widget.pad,
-      padTop: widget.padTop,
-      padbottom: widget.padbottom,
-      fixedIndex: widget.fixedIndex,
-      radius: widget.radius,
-      initialActive: widget.indexSelected,
-      items: widget.items,
-      onTap: widget.onTap,
-      chipStyle: widget.chipStyle,
-      itemStyle: widget.itemStyle,
-      color: widget.color,
-      colorSelected: widget.colorSelected,
-      iconSize: widget.iconSize,
-      countStyle: widget.countStyle,
-      titleStyle: widget.titleStyle,
-      sizeInside: widget.sizeInside,
-      duration: widget.duration,
-      curve: widget.curve ?? Curves.easeInOutCubic,
-      animateStyle: 'flip',
-    );
+        height: widget.height!,
+        background: widget.backgroundColor,
+        fixed: widget.fixed,
+        elevation: widget.elevation,
+        animated: widget.animated,
+        isAnimated: widget.isAnimated,
+        pad: widget.pad,
+        padTop: widget.padTop,
+        padbottom: widget.padbottom,
+        fixedIndex: widget.fixedIndex,
+        radius: widget.radius,
+        initialActive: widget.indexSelected,
+        items: widget.items,
+        onTap: widget.onTap,
+        chipStyle: widget.chipStyle,
+        itemStyle: widget.itemStyle,
+        color: widget.color,
+        colorSelected: widget.colorSelected,
+        iconSize: widget.iconSize,
+        countStyle: widget.countStyle,
+        titleStyle: widget.titleStyle,
+        sizeInside: widget.sizeInside,
+        duration: widget.duration,
+        curve: widget.curve ?? Curves.easeInOutCubic,
+        animateStyle: 'flip',
+        showSelectedTitle: widget.showSelectedTitle);
   }
 }
