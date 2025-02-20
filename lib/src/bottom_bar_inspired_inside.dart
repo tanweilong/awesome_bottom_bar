@@ -59,7 +59,7 @@ class BottomBarInspiredInside extends StatefulWidget {
     this.radius = 0,
     this.fixedIndex = 0,
     this.showSelectedTitle = true,
-    this.top,
+    this.top = -18,
   }) : super(key: key);
 
   @override
@@ -97,7 +97,7 @@ class _BottomBarInspiredInsideState extends State<BottomBarInspiredInside> {
         curve: widget.curve ?? Curves.easeInOutCubic,
         animateStyle: 'flip',
         showSelectedTitle: widget.showSelectedTitle,
-        top: widget.top
+        top: widget.top ?? -18
       );
   }
 }
