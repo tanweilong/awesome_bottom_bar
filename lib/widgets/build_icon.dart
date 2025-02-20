@@ -19,11 +19,31 @@ class BuildIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(item.icon is Widget) {
+      if (item.count is Widget) {
+        double sizeBadge = countStyle?.size ?? 18;
+
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            item.icon,
+            PositionedDirectional(
+              start: iconSize - sizeBadge / 2,
+              top: -sizeBadge / 2,
+              child: item.count!,
+            ),
+          ],
+        );
+      }
+      return item.icon;
+    }
+
     Widget icon = Icon(
       item.icon,
       size: iconSize,
       color: iconColor,
     );
+
     if (item.count is Widget) {
       double sizeBadge = countStyle?.size ?? 18;
 
